@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "PasteboardObserver",
+    name: "Localizable",
     defaultLocalization: "en",
     platforms: [
         .macOS(.v11)
@@ -12,16 +12,16 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "PasteboardObserver",
-            targets: ["PasteboardObserver"]),
+            name: "Localizable",
+            targets: ["Localizable"]),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "PasteboardObserver"),
+            name: "Localizable"),
         .testTarget(
-            name: "PasteboardObserverTests",
-            dependencies: ["PasteboardObserver"]),
+            name: "LocalizableTests",
+            dependencies: ["Localizable"]),
     ]
 )
