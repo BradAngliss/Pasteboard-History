@@ -24,6 +24,7 @@ struct ClipboardItemRowView: View {
                     Spacer()
                 }
                 .frame(maxWidth: .infinity)
+                .lineLimit(1)
             }
             Divider()
         }
