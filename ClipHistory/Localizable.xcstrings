@@ -1,7 +1,42 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-
+    "MenuBarExtra_Heading" : {
+      "extractionState" : "manual"
+    },
+    "MenuBarExtra_Quit_Title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quit"
+          }
+        }
+      }
+    },
+    "MenuBarExtra_Refresh_Title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refresh"
+          }
+        }
+      }
+    },
+    "MenuBarExtra_Title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pasteboard History"
+          }
+        }
+      }
+    }
   },
   "version" : "1.0"
 }

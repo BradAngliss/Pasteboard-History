@@ -7,7 +7,7 @@ let package = Package(
     name: "ClipboardUI",
     defaultLocalization: "en",
     platforms: [
-        .macOS(.v11)
+        .macOS(.v13)
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
@@ -15,11 +15,20 @@ let package = Package(
             name: "ClipboardUI",
             targets: ["ClipboardUI"]),
     ],
+    dependencies: [
+        .package(name: "Localizable", path: "../Localizable"),
+        .package(url: "git@github.com:BradAngliss/Swiftux.git", exact: "0.2.0")
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "ClipboardUI"),
+            name: "ClipboardUI",
+            dependencies: [
+                "Swiftux",
+                "Localizable"
+            ]
+        ),
         .testTarget(
             name: "ClipboardUITests",
             dependencies: ["ClipboardUI"]),

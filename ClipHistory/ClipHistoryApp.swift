@@ -6,25 +6,16 @@
 //
 
 import SwiftUI
+import ClipboardUI
+import Localizable
 
 @main
 struct ClipHistoryApp: App {
-    
-    var timer: Timer!
-    let pasteboard: NSPasteboard = .general
-    var lastChangeCount: Int = 0
-    
-    @State var currentNumber: String = "1"
-    
     var body: some Scene {
-        MenuBarExtra(currentNumber, systemImage: "clipboard") {
-            ClipboardView()
-            Divider()
-            Button("Quit") {
-                NSApplication.shared.terminate(nil)
-
-            }
-            .keyboardShortcut("q")
-        }.menuBarExtraStyle(.window)
+        MenuBarExtra(Localizable.stringFor(key: "MenuBarExtra_Title"), systemImage: "clipboard") {
+            ClipboardUIRootView()
+                .frame(width: 300, height: 250)
+        }
+        .menuBarExtraStyle(.window)
     }
 }
