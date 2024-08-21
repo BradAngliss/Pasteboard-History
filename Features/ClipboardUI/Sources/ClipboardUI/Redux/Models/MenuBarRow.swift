@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct MenuBarRow {
+public struct MenuBarRow {
     let id = UUID()
     let text: String?
     let image: NSImage?
@@ -17,5 +17,13 @@ struct MenuBarRow {
          image: NSImage? = nil) {
         self.text = text
         self.image = image
+    }
+}
+
+public extension MenuBarRow {
+    static var arrange: MenuBarRow {
+        .init(
+            text: "Menu bar row"
+        )
     }
 }

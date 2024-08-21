@@ -19,23 +19,12 @@ struct ClipboardMenuBarView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(Localizable.stringFor(key: "MenuBarExtra_Title"))
-                .padding(.horizontal, 8)
-
-            Divider()
+                .padding(8)
+                .font(.headline)
             ScrollView {
                 VStack(alignment: .leading) {
                     ForEach(clipboardUIState.pasteboardItems.reversed(), id: \.id) { item in
-                        if let image = item.image {
-                            Image(nsImage: image)
-                                .resizable()
-                                .frame(width: 100, height: 100)
-                        } else if let text = item.text {
-                            HStack {
-                                Text(text)
-                                Spacer()
-                            }
-                            .frame(maxWidth: .infinity)
-                        }
+                        ClipboardItemRowView(item: item)
                     }
                 }
                 .padding(.horizontal, 8)
