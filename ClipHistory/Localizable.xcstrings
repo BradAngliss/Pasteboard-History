@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "MenuBarExtra_Heading" : {
-      "extractionState" : "manual"
-    },
     "MenuBarExtra_Quit_Title" : {
       "extractionState" : "manual",
       "localizations" : {

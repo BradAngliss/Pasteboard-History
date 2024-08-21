@@ -18,8 +18,9 @@ struct ClipboardMenuBarView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(Localizable.stringFor(key: "MenuBarExtra_Heading"))
-            
+            Text(Localizable.stringFor(key: "MenuBarExtra_Title"))
+                .padding(.horizontal, 8)
+
             Divider()
             ScrollView {
                 VStack(alignment: .leading) {
@@ -29,32 +30,46 @@ struct ClipboardMenuBarView: View {
                                 .resizable()
                                 .frame(width: 100, height: 100)
                         } else if let text = item.text {
-                            Text(text)
+                            HStack {
+                                Text(text)
+                                Spacer()
+                            }
+                            .frame(maxWidth: .infinity)
                         }
                     }
                 }
+                .padding(.horizontal, 8)
             }
-
+            Spacer()
             Divider()
-            HStack {
-                Button {
-                    store.dispatch(.refreshPasteboardItems)
-                } label: {
-                    Text(Localizable.stringFor(key: "MenuBarExtra_Refresh_Title"))
-                }
-                Divider()
-                Button {
-                    NSApplication.shared.terminate(nil)
-                } label: {
-                    Text(Localizable.stringFor(key: "MenuBarExtra_Quit_Title"))
-                }
-                .keyboardShortcut("q")
-
-            }
+            footer()
+                .padding(.horizontal, 8)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
             store.dispatch(.updateChangeCount(changeCount: NSPasteboard.general.changeCount))
+        }
+    }
+
+    private func footer() -> some View {
+        HStack(spacing: 0) {
+            Button {
+                store.dispatch(.refreshPasteboardItems)
+            } label: {
+                Text(Localizable.stringFor(key: "MenuBarExtra_Refresh_Title"))
+            }
+            .padding(8)
+            .frame(maxWidth: .infinity)
+
+            Button {
+                NSApplication.shared.terminate(nil)
+            } label: {
+                Text(Localizable.stringFor(key: "MenuBarExtra_Quit_Title"))
+            }
+            .keyboardShortcut("q")
+            .padding(8)
+            .frame(maxWidth: .infinity)
+
         }
     }
 }
