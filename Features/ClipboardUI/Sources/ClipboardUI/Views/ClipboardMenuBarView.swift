@@ -35,6 +35,7 @@ struct ClipboardMenuBarView: View {
                 .padding(.horizontal, 8)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.horizontal, 8)
         .onAppear {
             store.dispatch(.updateChangeCount(changeCount: NSPasteboard.general.changeCount))
         }
