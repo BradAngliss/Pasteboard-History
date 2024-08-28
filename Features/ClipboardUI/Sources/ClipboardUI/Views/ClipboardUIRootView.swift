@@ -24,7 +24,7 @@ public struct ClipboardUIRootView: View {
     }
     
     public var body: some View {
-        ClipboardUIView()
+        ClipboardMenuBarView()
             .environmentObject(store)
     }
     

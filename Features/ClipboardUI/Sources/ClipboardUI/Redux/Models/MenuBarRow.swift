@@ -1,14 +1,14 @@
 //
-//  RowDataModel.swift
+//  MenuBarRow.swift
 //  ClipHistory
 //
 //  Created by Brad Angliss on 18/06/2024.
 //
 
 import Foundation
-import AppKit
+import SwiftUI
 
-struct RowDataModel {
+public struct MenuBarRow {
     let id = UUID()
     let text: String?
     let image: NSImage?
@@ -18,5 +18,12 @@ struct RowDataModel {
         self.text = text
         self.image = image
     }
-    
+}
+
+public extension MenuBarRow {
+    static var arrange: MenuBarRow {
+        .init(
+            text: "Menu bar row"
+        )
+    }
 }
