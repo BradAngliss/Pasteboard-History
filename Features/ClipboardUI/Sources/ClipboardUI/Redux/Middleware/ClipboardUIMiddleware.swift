@@ -23,6 +23,12 @@ let clipboardUIMiddleware: Middleware<ClipboardUIState, ClipboardUIAction> = { s
         if let pasteboardText = state.pasteboard.string(forType: .string) {
             return ClipboardUIAction.addMenuBarRow(.init(text: pasteboardText))
         }
+    case let .copyToPasteboard(item):
+        if let pasteboardText = item.text {
+//            state.pasteboard.setData(item.text?.data(using: .utf8), forType: .string)
+            state.pasteboard.prepareForNewContents()
+            state.pasteboard.setString(pasteboardText, forType: .string)
+        }
     }
     return nil
 }
