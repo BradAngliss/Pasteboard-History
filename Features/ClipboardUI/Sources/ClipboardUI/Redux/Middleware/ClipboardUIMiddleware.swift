@@ -19,24 +19,23 @@ let clipboardUIMiddleware: Middleware<ClipboardUIState, ClipboardUIAction> = { s
         if let imageData = state.pasteboard.data(forType: NSPasteboard.PasteboardType.tiff),
             let convertedImage = NSImage(data: imageData) {
             return ClipboardUIAction.addMenuBarRow(.init(
-                item: MenuBarImage(
-                    image: convertedImage,
-                    data: imageData
-                ))
+                type: .image,
+                data: imageData)
             )
         }
         if let pasteboardText = state.pasteboard.string(forType: .string) {
-            return ClipboardUIAction.addMenuBarRow(.init(item: MenuBarText(text: pasteboardText)))
+            return ClipboardUIAction.addMenuBarRow(.init(
+                type: .text, data: pasteboardText.data(using: .utf8)!
+            ))
         }
     case let .copyToPasteboard(row):
         state.pasteboard.prepareForNewContents()
 
-        switch row.item.type {
+        switch row.type {
         case .text:
-            state.pasteboard.setString((row.item as! MenuBarText).text, forType: .string)
+            state.pasteboard.setString(String(data: row.data, encoding: .utf8)!, forType: .string)
         case .image:
-            let imageData = (row.item as! MenuBarImage).data
-            state.pasteboard.setData(Data(imageData), forType: .tiff)
+            state.pasteboard.setData(Data(row.data), forType: .tiff)
         }
     }
     return nil

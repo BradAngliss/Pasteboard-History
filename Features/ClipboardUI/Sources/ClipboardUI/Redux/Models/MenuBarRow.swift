@@ -10,11 +10,8 @@ import SwiftUI
 
 public struct MenuBarRow {
     let id = UUID()
-    let item: any MenuBarItemProtocol
-    
-    init(item: MenuBarItemProtocol) {
-        self.item = item
-    }
+    let type: MenuBarType
+    let data: Data
 }
 
 enum MenuBarType {
@@ -22,35 +19,11 @@ enum MenuBarType {
     case image
 }
 
-protocol MenuBarItemProtocol {
-    var type: MenuBarType { get }
-    func saveToPasteboard() -> Void
-}
-
-public struct MenuBarImage: MenuBarItemProtocol {
-    let type: MenuBarType = .image
-    let image: NSImage
-    let data: Data
-
-    func saveToPasteboard() {
-        return
-    }
-}
-
-public struct MenuBarText: MenuBarItemProtocol {
-    let type: MenuBarType = .text
-    let text: String
-
-    func saveToPasteboard() {
-//        state.pasteboard.setString(pasteboardText, forType: .string)
-        return
-    }
-}
-
 public extension MenuBarRow {
     static var arrange: MenuBarRow {
         .init(
-            item: MenuBarText(text: "This is a test row")
+            type: .text,
+            data: "This is a test row".data(using: .utf8)!
         )
     }
 }

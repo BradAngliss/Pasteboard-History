@@ -22,16 +22,16 @@ struct ClipboardItemRowView: View {
 
     @ViewBuilder
     func itemRow(item: MenuBarRow) -> some View {
-        switch item.item.type {
+        switch item.type {
         case .text:
             HStack {
-                Text((item.item as! MenuBarText).text)
+                Text(String(decoding: item.data, as: UTF8.self))
                 Spacer()
             }
             .frame(maxWidth: .infinity)
             .lineLimit(1)
         case .image:
-            Image(nsImage: (item.item as! MenuBarImage).image)
+            Image(nsImage: NSImage(data: item.data)!)
                 .resizable()
                 .frame(width: 100, height: 100)
         }
