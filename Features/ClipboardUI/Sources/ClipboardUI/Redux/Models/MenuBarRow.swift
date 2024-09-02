@@ -10,20 +10,20 @@ import SwiftUI
 
 public struct MenuBarRow {
     let id = UUID()
-    let text: String?
-    let image: NSImage?
-    
-    init(text: String? = nil,
-         image: NSImage? = nil) {
-        self.text = text
-        self.image = image
-    }
+    let type: MenuBarType
+    let data: Data
+}
+
+enum MenuBarType {
+    case text
+    case image
 }
 
 public extension MenuBarRow {
     static var arrange: MenuBarRow {
         .init(
-            text: "Menu bar row"
+            type: .text,
+            data: "This is a test row".data(using: .utf8)!
         )
     }
 }

@@ -25,6 +25,10 @@ struct ClipboardMenuBarView: View {
                 VStack(alignment: .leading) {
                     ForEach(clipboardUIState.pasteboardItems.reversed(), id: \.id) { item in
                         ClipboardItemRowView(item: item)
+                            .onTapGesture {
+                                print("Tapped")
+                                store.dispatch(.copyToPasteboard(item))
+                            }
                     }
                 }
                 .padding(.horizontal, 8)

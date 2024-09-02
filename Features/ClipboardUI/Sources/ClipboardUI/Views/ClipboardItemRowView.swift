@@ -14,21 +14,27 @@ struct ClipboardItemRowView: View {
 
     var body: some View {
         VStack {
-            if let image = item.image {
-                Image(nsImage: image)
-                    .resizable()
-                    .frame(width: 100, height: 100)
-            } else if let text = item.text {
-                HStack {
-                    Text(text)
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity)
-                .lineLimit(1)
-            }
+            itemRow(item: item)
             Divider()
         }
         .padding(.vertical, 2)
+    }
+
+    @ViewBuilder
+    func itemRow(item: MenuBarRow) -> some View {
+        switch item.type {
+        case .text:
+            HStack {
+                Text(String(decoding: item.data, as: UTF8.self))
+                Spacer()
+            }
+            .frame(maxWidth: .infinity)
+            .lineLimit(1)
+        case .image:
+            Image(nsImage: NSImage(data: item.data)!)
+                .resizable()
+                .frame(width: 100, height: 100)
+        }
     }
 }
 
