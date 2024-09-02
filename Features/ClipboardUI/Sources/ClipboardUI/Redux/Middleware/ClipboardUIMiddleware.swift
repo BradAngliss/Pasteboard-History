@@ -16,12 +16,11 @@ let clipboardUIMiddleware: Middleware<ClipboardUIState, ClipboardUIAction> = { s
             .addMenuBarRow:
         break
     case .refreshPasteboardItems:
-        if let imageData = state.pasteboard.data(forType: NSPasteboard.PasteboardType.tiff),
-            let convertedImage = NSImage(data: imageData) {
+        if let imageData = state.pasteboard.data(forType: NSPasteboard.PasteboardType.tiff) {
             return ClipboardUIAction.addMenuBarRow(.init(
                 type: .image,
-                data: imageData)
-            )
+                data: imageData
+            ))
         }
         if let pasteboardText = state.pasteboard.string(forType: .string) {
             return ClipboardUIAction.addMenuBarRow(.init(
