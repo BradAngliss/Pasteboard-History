@@ -23,17 +23,31 @@ struct ClipboardItemRowView: View {
     @ViewBuilder
     func itemRow(item: MenuBarRow) -> some View {
         switch item.type {
-        case .text:
+        case .string:
             HStack {
                 Text(String(decoding: item.data, as: UTF8.self))
                 Spacer()
             }
             .frame(maxWidth: .infinity)
             .lineLimit(1)
-        case .image:
-            Image(nsImage: NSImage(data: item.data)!)
-                .resizable()
-                .frame(width: 100, height: 100)
+        case .tiff, .png:
+            HStack {
+                Image(nsImage: NSImage(data: item.data)!)
+                    .resizable()
+                    .frame(width: 100, height: 100)
+                Spacer()
+                Text(item.type.rawValue)
+            }
+        case .fileURL:
+            HStack {
+                Image(nsImage: NSImage(data: item.displayData)!)
+                    .resizable()
+                    .frame(width: 100, height: 100)
+                Spacer()
+                Text(item.type.rawValue)
+            }
+        default:
+            EmptyView()
         }
     }
 }

@@ -27,6 +27,7 @@ struct ClipboardMenuBarView: View {
                         ClipboardItemRowView(item: item)
                             .onTapGesture {
                                 print("Tapped")
+                                print(item.pasteboardTypes)
                                 store.dispatch(.copyToPasteboard(item))
                             }
                     }

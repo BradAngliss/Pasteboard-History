@@ -10,20 +10,19 @@ import SwiftUI
 
 public struct MenuBarRow {
     let id = UUID()
-    let type: MenuBarType
+    let type: NSPasteboard.PasteboardType
+    let displayData: Data
     let data: Data
-}
-
-enum MenuBarType {
-    case text
-    case image
+    let pasteboardTypes: [NSPasteboard.PasteboardType]
 }
 
 public extension MenuBarRow {
     static var arrange: MenuBarRow {
         .init(
-            type: .text,
-            data: "This is a test row".data(using: .utf8)!
+            type: .string,
+            displayData: .init(),
+            data: "This is a test row".data(using: .utf8)!,
+            pasteboardTypes: [.string]
         )
     }
 }
