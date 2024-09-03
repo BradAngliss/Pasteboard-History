@@ -46,24 +46,18 @@ struct ClipboardMenuBarView: View {
     }
 
     private func footer() -> some View {
-        HStack(spacing: 0) {
-            Button {
-                store.dispatch(.refreshPasteboardItems)
-            } label: {
-                Text(Localizable.stringFor(key: "MenuBarExtra_Refresh_Title"))
-            }
-            .padding(8)
-            .frame(maxWidth: .infinity)
-
-            Button {
-                NSApplication.shared.terminate(nil)
-            } label: {
-                Text(Localizable.stringFor(key: "MenuBarExtra_Quit_Title"))
+        VStack(alignment: .leading, spacing: 4) {
+            Text(Localizable.stringFor(key: "MenuBarExtra_Refresh_Title"))
+                .onTapGesture {
+                    store.dispatch(.refreshPasteboardItems)
+                }
+            
+            Text(Localizable.stringFor(key: "MenuBarExtra_Quit_Title"))
+                .onTapGesture {
+                    NSApplication.shared.terminate(nil)
             }
             .keyboardShortcut("q")
-            .padding(8)
-            .frame(maxWidth: .infinity)
-
+            .padding(.bottom, 8)
         }
     }
 }
