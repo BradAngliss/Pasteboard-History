@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct ClipboardUIState {
+struct ClipboardUIState: Equatable {
     var items = [PasteboardItem]()
     let pasteboard = NSPasteboard.general
     
@@ -16,7 +16,6 @@ struct ClipboardUIState {
     
     init(lastChangeCount: Int = 0) {
         self.lastChangeCount = lastChangeCount
-        
     }
 
     func pasteboardItemExists(for pasteboardItem: PasteboardItem) -> Bool {

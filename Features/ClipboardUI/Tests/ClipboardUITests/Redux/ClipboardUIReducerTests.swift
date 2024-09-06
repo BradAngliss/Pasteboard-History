@@ -1,0 +1,66 @@
+//
+//  ClipboardUIReducerTests.swift
+//  
+//
+//  Created by Brad Angliss on 06/09/2024.
+//
+
+import Foundation
+import XCTest
+@testable import ClipboardUI
+
+final class ClipboardUIReducerTests: XCTestCase {
+    
+    func test_refreshPasteboardItems() {
+        let initialState = ClipboardUIState()
+        let expectedState = initialState
+        
+        let resultState = clipboardUIReducer(initialState, .refreshPasteboardItems)
+        
+        XCTAssertEqual(expectedState, resultState)
+    }
+    
+    
+    func test_copyToPasteboard() {
+        let initialState = ClipboardUIState()
+        let expectedState = initialState
+        
+        let resultState = clipboardUIReducer(initialState, .copyToPasteboard(.arrange))
+        
+        XCTAssertEqual(expectedState, resultState)
+    }
+    
+    func test_updateChangeCount_noChange() {
+        var initialState = ClipboardUIState()
+        initialState.lastChangeCount = 2
+        
+        let expectedState = initialState
+        
+        let resultState = clipboardUIReducer(initialState, .updateChangeCount(changeCount: 2))
+        
+        XCTAssertEqual(expectedState, resultState)
+    }
+    
+    func test_updateChangeCount_setChange() {
+        var initialState = ClipboardUIState()
+        initialState.lastChangeCount = 1
+        
+        var expectedState = initialState
+        expectedState.lastChangeCount = 2
+        
+        let resultState = clipboardUIReducer(initialState, .updateChangeCount(changeCount: 2))
+        
+        XCTAssertEqual(expectedState, resultState)
+    }
+    
+    func test_addPasteboardItems() {
+        let initialState = ClipboardUIState()
+
+        var expectedState = initialState
+        expectedState.items.append(.arrange)
+
+        let resultState = clipboardUIReducer(initialState, .addPasteboardItems(.arrange))
+
+        XCTAssertEqual(expectedState, resultState)
+    }
+}

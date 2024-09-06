@@ -12,9 +12,6 @@ import SwiftUI
 let clipboardUIMiddleware: Middleware<ClipboardUIState, ClipboardUIAction> = { state, action in
 
     switch action {
-    case .updateChangeCount,
-            .addPasteboardItems:
-        break
     case .refreshPasteboardItems:
         // Get available supported types from pasteboard
         guard let pasteboardTypes = state.pasteboard.types,
@@ -54,6 +51,9 @@ let clipboardUIMiddleware: Middleware<ClipboardUIState, ClipboardUIAction> = { s
                 break
             }
         }
+    case .updateChangeCount,
+            .addPasteboardItems:
+        break
     }
     return nil
 }
