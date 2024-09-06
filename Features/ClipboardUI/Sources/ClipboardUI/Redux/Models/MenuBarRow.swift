@@ -12,17 +12,13 @@ public struct MenuBarRow {
     let id = UUID()
     let type: NSPasteboard.PasteboardType
     let displayData: Data
-    let data: Data
-    let pasteboardTypes: [NSPasteboard.PasteboardType]
 }
 
 public extension MenuBarRow {
     static var arrange: MenuBarRow {
         .init(
             type: .string,
-            displayData: .init(),
-            data: "This is a test row".data(using: .utf8)!,
-            pasteboardTypes: [.string]
+            displayData: .init()
         )
     }
 }

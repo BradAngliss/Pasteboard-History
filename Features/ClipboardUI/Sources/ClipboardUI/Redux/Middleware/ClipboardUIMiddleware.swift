@@ -13,65 +13,47 @@ let clipboardUIMiddleware: Middleware<ClipboardUIState, ClipboardUIAction> = { s
 
     switch action {
     case .updateChangeCount,
-            .addMenuBarRow:
+            .addPasteboardItems:
         break
     case .refreshPasteboardItems:
-        if let availablePasteboardType = state.pasteboard.availableType(from: [.fileURL, .tiff, .png, .string]) {
-            switch availablePasteboardType {
-            case .string:
-                guard let pasteboardText = state.pasteboard.string(forType: availablePasteboardType) else {
-                    break
-                }
-                return ClipboardUIAction.addMenuBarRow(.init(
-                    type: availablePasteboardType,
-                    displayData: pasteboardText.data(using: .utf8)!,
-                    data: pasteboardText.data(using: .utf8)!,
-                    pasteboardTypes: state.pasteboard.pasteboardItems![0].types
-                ))
-            case .tiff, .png:
-                guard let imageData = state.pasteboard.data(forType: availablePasteboardType) else {
-                    break
-                }
-                return ClipboardUIAction.addMenuBarRow(.init(
-                    type: availablePasteboardType,
-                    displayData: imageData,
-                    data: imageData,
-                    pasteboardTypes: state.pasteboard.pasteboardItems![0].types
-                ))
-            case .fileURL:
-                guard let urlData = state.pasteboard.data(forType: availablePasteboardType) else {
-                    break
-                }
-                return ClipboardUIAction.addMenuBarRow(.init(
-                    type: availablePasteboardType,
-                    displayData: state.pasteboard.data(forType: .tiff)!,
-                    data: urlData,
-                    pasteboardTypes: state.pasteboard.pasteboardItems![0].types
-                ))
-                
-            default:
-                break
-            }
+        // Get available supported types from pasteboard
+        guard let pasteboardTypes = state.pasteboard.types,
+                let availableType = state.pasteboard.availableType(
+                    from: [.fileURL, .tiff, .png, .string]
+                ) else {
+            return nil
+        }
+
+        var pasteboardItem = PasteboardItem(availableType: availableType)
+
+        for type in pasteboardTypes {
+            pasteboardItem.pasteboardDataTypes[type] = state.pasteboard.data(forType: type)
+        }
+
+        // Verify iten is valid and not currently persisted
+        guard pasteboardItem.pasteboardDataTypes.count > 0,
+              !state.pasteboardItemExists(for: pasteboardItem) else {
+            return nil
         }
         
+        return .addPasteboardItems(pasteboardItem)
         
-    case let .copyToPasteboard(row):
+    case let .copyToPasteboard(pasteboardItem):
         state.pasteboard.prepareForNewContents()
-        
-        for type in row.pasteboardTypes {
-            switch row.type {
+
+        for (type, data) in pasteboardItem.pasteboardDataTypes {
+            switch type {
             case .string:
-                state.pasteboard.setString(String(data: row.data, encoding: .utf8)!, forType: type)
+                state.pasteboard.setString(String(data: Data(data), encoding: .utf8)!, forType: type)
             case .png, .tiff:
-                state.pasteboard.setData(Data(row.data), forType: type)
+                state.pasteboard.setData(Data(data), forType: type)
             case .fileURL:
-                let url = URL(dataRepresentation: row.data, relativeTo: .applicationDirectory, isAbsolute: true)
+                let url = URL(dataRepresentation: data, relativeTo: .applicationDirectory, isAbsolute: true)
                 state.pasteboard.setData(url?.dataRepresentation, forType: type)
             default:
                 break
             }
         }
-//        state.pasteboard.addTypes(row.pasteboardTypes, owner: nil)
     }
     return nil
 }

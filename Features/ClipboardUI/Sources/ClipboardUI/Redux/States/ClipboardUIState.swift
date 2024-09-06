@@ -9,14 +9,19 @@ import Foundation
 import SwiftUI
 
 struct ClipboardUIState {
-    var pasteboardItems = [MenuBarRow]()
+    var items = [PasteboardItem]()
     let pasteboard = NSPasteboard.general
     
     var lastChangeCount: Int
     
     init(lastChangeCount: Int = 0) {
         self.lastChangeCount = lastChangeCount
+        
+    }
+
+    func pasteboardItemExists(for pasteboardItem: PasteboardItem) -> Bool {
+        return items.contains(where: {
+            $0.pasteboardDataTypes == pasteboardItem.pasteboardDataTypes
+        })
     }
 }
-
-

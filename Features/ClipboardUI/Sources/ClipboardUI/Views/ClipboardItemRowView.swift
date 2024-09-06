@@ -10,11 +10,13 @@ import SwiftUI
 import Localizable
 
 struct ClipboardItemRowView: View {
-    let item: MenuBarRow
+    let item: PasteboardItem
 
     var body: some View {
         VStack {
-            itemRow(item: item)
+            itemRow(
+                item: item.menuBarRow ?? .init(type: .string, displayData: "Failed to fetch".data(using: .utf8)!)
+            )
             Divider()
         }
         .padding(.vertical, 2)
@@ -25,14 +27,14 @@ struct ClipboardItemRowView: View {
         switch item.type {
         case .string:
             HStack {
-                Text(String(decoding: item.data, as: UTF8.self))
+                Text(String(decoding: item.displayData, as: UTF8.self))
                 Spacer()
             }
             .frame(maxWidth: .infinity)
             .lineLimit(1)
         case .tiff, .png:
             HStack {
-                Image(nsImage: NSImage(data: item.data)!)
+                Image(nsImage: NSImage(data: item.displayData)!)
                     .resizable()
                     .frame(width: 100, height: 100)
                 Spacer()
@@ -50,8 +52,4 @@ struct ClipboardItemRowView: View {
             EmptyView()
         }
     }
-}
-
-#Preview {
-    ClipboardItemRowView(item: .arrange)
 }

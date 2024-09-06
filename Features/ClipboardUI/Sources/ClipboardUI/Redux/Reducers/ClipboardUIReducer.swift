@@ -14,8 +14,8 @@ let clipboardUIReducer: Reducer<ClipboardUIState, ClipboardUIAction> = { state, 
     switch action {
     case .updateChangeCount(let changeCount):
         newState.lastChangeCount = changeCount != state.lastChangeCount ? changeCount : state.lastChangeCount
-    case .addMenuBarRow(let menuBarRow):
-        newState.pasteboardItems.append(menuBarRow)
+    case .addPasteboardItems(let pasteboardItem):
+        newState.items.append(pasteboardItem)
     case .refreshPasteboardItems,
             .copyToPasteboard:
         break
