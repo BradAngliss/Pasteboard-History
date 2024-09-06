@@ -21,13 +21,17 @@ let clipboardUIMiddleware: Middleware<ClipboardUIState, ClipboardUIAction> = { s
             return nil
         }
 
-        var pasteboardItem = PasteboardItem(availableType: availableType)
+        guard let displayType = state.pasteboard.availableType(from: [.tiff, .png, .string]) else {
+            return nil
+        }
+
+        var pasteboardItem = PasteboardItem(availableType: displayType)
 
         for type in pasteboardTypes {
             pasteboardItem.pasteboardDataTypes[type] = state.pasteboard.data(forType: type)
         }
 
-        // Verify iten is valid and not currently persisted
+        // Verify item is valid and not currently persisted
         guard pasteboardItem.pasteboardDataTypes.count > 0,
               !state.pasteboardItemExists(for: pasteboardItem) else {
             return nil
