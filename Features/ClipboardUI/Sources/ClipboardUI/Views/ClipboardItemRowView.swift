@@ -25,7 +25,7 @@ struct ClipboardItemRowView: View {
     @ViewBuilder
     func itemRow(item: MenuBarRow) -> some View {
         switch item.type {
-        case .string:
+        case .string, .URL:
             HStack {
                 Text(String(decoding: item.displayData, as: UTF8.self))
                 Spacer()

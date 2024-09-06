@@ -16,7 +16,7 @@ let clipboardUIMiddleware: Middleware<ClipboardUIState, ClipboardUIAction> = { s
         // Get available supported types from pasteboard
         guard let pasteboardTypes = state.pasteboard.types,
                 let availableType = state.pasteboard.availableType(
-                    from: [.fileURL, .tiff, .png, .string]
+                    from: [.URL, .fileURL, .tiff, .png, .string]
                 ) else {
             return nil
         }
@@ -44,9 +44,9 @@ let clipboardUIMiddleware: Middleware<ClipboardUIState, ClipboardUIAction> = { s
 
         for (type, data) in pasteboardItem.pasteboardDataTypes {
             switch type {
-            case .string:
+            case .string, .URL:
                 state.pasteboard.setString(String(data: Data(data), encoding: .utf8)!, forType: type)
-            case .png, .tiff:
+            case .png, .tiff, .rtf, .rtfd:
                 state.pasteboard.setData(Data(data), forType: type)
             case .fileURL:
                 let url = URL(dataRepresentation: data, relativeTo: .applicationDirectory, isAbsolute: true)
