@@ -10,12 +10,13 @@ import SwiftUI
 
 struct ClipboardUIState: Equatable {
     var items = [PasteboardItem]()
-    let pasteboard = NSPasteboard.general
+    let pasteboard: NSPasteboard
     
     var lastChangeCount: Int
     
-    init(lastChangeCount: Int = 0) {
+    init(lastChangeCount: Int = 0, pasteboard: NSPasteboard) {
         self.lastChangeCount = lastChangeCount
+        self.pasteboard = pasteboard
     }
 
     func pasteboardItemExists(for pasteboardItem: PasteboardItem) -> Bool {

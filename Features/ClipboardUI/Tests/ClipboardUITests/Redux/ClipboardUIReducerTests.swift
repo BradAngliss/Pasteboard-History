@@ -10,9 +10,16 @@ import XCTest
 @testable import ClipboardUI
 
 final class ClipboardUIReducerTests: XCTestCase {
-    
+    var mockNSPasteboard: MockNSPasteboard!
+
+    override func setUp() {
+        super.setUp()
+
+        mockNSPasteboard = MockNSPasteboard()
+    }
+
     func test_refreshPasteboardItems() {
-        let initialState = ClipboardUIState()
+        let initialState = ClipboardUIState(pasteboard: mockNSPasteboard)
         let expectedState = initialState
         
         let resultState = clipboardUIReducer(initialState, .refreshPasteboardItems)
@@ -22,7 +29,7 @@ final class ClipboardUIReducerTests: XCTestCase {
     
     
     func test_copyToPasteboard() {
-        let initialState = ClipboardUIState()
+        let initialState = ClipboardUIState(pasteboard: mockNSPasteboard)
         let expectedState = initialState
         
         let resultState = clipboardUIReducer(initialState, .copyToPasteboard(.arrange))
@@ -31,7 +38,7 @@ final class ClipboardUIReducerTests: XCTestCase {
     }
     
     func test_updateChangeCount_noChange() {
-        var initialState = ClipboardUIState()
+        var initialState = ClipboardUIState(pasteboard: mockNSPasteboard)
         initialState.lastChangeCount = 2
         
         let expectedState = initialState
@@ -42,7 +49,7 @@ final class ClipboardUIReducerTests: XCTestCase {
     }
     
     func test_updateChangeCount_setChange() {
-        var initialState = ClipboardUIState()
+        var initialState = ClipboardUIState(pasteboard: mockNSPasteboard)
         initialState.lastChangeCount = 1
         
         var expectedState = initialState
@@ -54,7 +61,7 @@ final class ClipboardUIReducerTests: XCTestCase {
     }
     
     func test_addPasteboardItems() {
-        let initialState = ClipboardUIState()
+        let initialState = ClipboardUIState(pasteboard: mockNSPasteboard)
 
         var expectedState = initialState
         expectedState.items.append(.arrange)

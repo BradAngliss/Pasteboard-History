@@ -10,8 +10,16 @@ import XCTest
 @testable import ClipboardUI
 
 final class ClipboardUIMiddlewareTests: XCTestCase {
+    var mockNSPasteboard: MockNSPasteboard!
+
+    override func setUp() {
+        super.setUp()
+
+        mockNSPasteboard = MockNSPasteboard()
+    }
+
     func test_updateChangeCount() async {
-        let initialState = ClipboardUIState()
+        let initialState = ClipboardUIState(pasteboard: mockNSPasteboard)
 
         let resultAction = await clipboardUIMiddleware(
                 initialState,
@@ -22,7 +30,7 @@ final class ClipboardUIMiddlewareTests: XCTestCase {
     }
     
     func test_addPasteboardItems() async {
-        let initialState = ClipboardUIState()
+        let initialState = ClipboardUIState(pasteboard: mockNSPasteboard)
 
         let resultAction = await clipboardUIMiddleware(
                 initialState,
