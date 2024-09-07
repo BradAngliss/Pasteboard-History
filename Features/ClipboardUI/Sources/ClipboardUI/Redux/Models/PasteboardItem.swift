@@ -15,11 +15,7 @@ struct PasteboardItem: Hashable {
         return pasteboardDataTypes[type]!
     }
 
-    var types: [NSPasteboard.PasteboardType] {
-        Array(pasteboardDataTypes.keys)
-    }
-
-    var menuBarRow: MenuBarRow? {
-        return .init(type: availableType, displayData: pasteboardDataTypes[availableType]!)
+    var displayData: Data {
+        data(forType: availableType)
     }
 }

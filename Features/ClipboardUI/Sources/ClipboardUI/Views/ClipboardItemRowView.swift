@@ -15,7 +15,7 @@ struct ClipboardItemRowView: View {
     var body: some View {
         VStack {
             itemRow(
-                item: item.menuBarRow ?? .init(type: .string, displayData: "Failed to fetch".data(using: .utf8)!)
+                item: item
             )
             Divider()
         }
@@ -23,8 +23,8 @@ struct ClipboardItemRowView: View {
     }
 
     @ViewBuilder
-    func itemRow(item: MenuBarRow) -> some View {
-        switch item.type {
+    func itemRow(item: PasteboardItem) -> some View {
+        switch item.availableType {
         case .string, .URL:
             HStack {
                 Text(String(decoding: item.displayData, as: UTF8.self))
@@ -38,7 +38,7 @@ struct ClipboardItemRowView: View {
                     .resizable()
                     .frame(width: 100, height: 100)
                 Spacer()
-                Text(item.type.rawValue)
+                Text(item.availableType.rawValue)
             }
         case .fileURL:
             HStack {
@@ -46,7 +46,7 @@ struct ClipboardItemRowView: View {
                     .resizable()
                     .frame(width: 100, height: 100)
                 Spacer()
-                Text(item.type.rawValue)
+                Text(item.availableType.rawValue)
             }
         default:
             EmptyView()
