@@ -14,7 +14,7 @@ public struct ClipboardUIRootView: View {
     
     public init() {
         
-        let initialState = ClipboardUIState()
+        let initialState = ClipboardUIState(pasteboard: NSPasteboard.general)
         
         let store = ClipboardUIStore(initial: initialState,
                               reducer: clipboardUIReducer,

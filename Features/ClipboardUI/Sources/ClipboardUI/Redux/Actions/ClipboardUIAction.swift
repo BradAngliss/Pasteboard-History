@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum ClipboardUIAction: Equatable {
     case updateChangeCount(changeCount: Int)
     case refreshPasteboardItems
-    case addMenuBarRow(MenuBarRow)
-    case copyToPasteboard(MenuBarRow)
+    case copyToPasteboard(PasteboardItem)
+    case addPasteboardItems(PasteboardItem)
 
     static func == (lhs: ClipboardUIAction, rhs: ClipboardUIAction) -> Bool {
         switch (lhs, rhs) {
@@ -19,10 +20,11 @@ enum ClipboardUIAction: Equatable {
             return true
         case (.updateChangeCount(let lhsChangeCount), .updateChangeCount(let rhsChangeCount)):
             return lhsChangeCount == rhsChangeCount
-        case (.addMenuBarRow(let lhsMenuBarRow), .addMenuBarRow(let rhsMenuBarRow)):
-            return lhsMenuBarRow.id == rhsMenuBarRow.id
         case let (.copyToPasteboard(lhsItem), .copyToPasteboard(rhsItem)):
-            return lhsItem.id == rhsItem.id
+            return lhsItem == rhsItem
+        case let (.addPasteboardItems(lhsItem), .addPasteboardItems(rhsItem)):
+            return lhsItem == rhsItem
+            
         default:
             return false
         }

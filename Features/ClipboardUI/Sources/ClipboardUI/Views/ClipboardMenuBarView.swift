@@ -15,19 +15,23 @@ struct ClipboardMenuBarView: View {
     private var clipboardUIState: ClipboardUIState {
         store.state
     }
-    
+
     var body: some View {
+        let pasteboardItems: Binding<[PasteboardItem]> = .init(
+            get: { clipboardUIState.items.reversed() },
+            set: { _ in /* not required*/ }
+        )
+
         VStack(alignment: .leading) {
             Text(Localizable.stringFor(key: "MenuBarExtra_Title"))
                 .padding(8)
                 .font(.headline)
             ScrollView {
                 VStack(alignment: .leading) {
-                    ForEach(clipboardUIState.pasteboardItems.reversed(), id: \.id) { item in
-                        ClipboardItemRowView(item: item)
+                    ForEach(pasteboardItems, id: \.self) { item in
+                        ClipboardItemRowView(item: item.wrappedValue)
                             .onTapGesture {
-                                print("Tapped")
-                                store.dispatch(.copyToPasteboard(item))
+                                store.dispatch(.copyToPasteboard(item.wrappedValue))
                             }
                     }
                 }
