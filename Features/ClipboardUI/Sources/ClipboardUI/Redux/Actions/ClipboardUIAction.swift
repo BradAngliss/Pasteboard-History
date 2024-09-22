@@ -13,6 +13,7 @@ enum ClipboardUIAction: Equatable {
     case refreshPasteboardItems
     case copyToPasteboard(PasteboardItem)
     case addPasteboardItems(PasteboardItem)
+    case movePasteboardItemToTop(PasteboardItem)
 
     static func == (lhs: ClipboardUIAction, rhs: ClipboardUIAction) -> Bool {
         switch (lhs, rhs) {

@@ -21,7 +21,9 @@ struct ClipboardUIState: Equatable {
 
     func pasteboardItemExists(for pasteboardItem: PasteboardItem) -> Bool {
         return items.contains(where: {
-            $0.pasteboardDataTypes == pasteboardItem.pasteboardDataTypes
+            $0 == pasteboardItem
         })
     }
 }
+
+
