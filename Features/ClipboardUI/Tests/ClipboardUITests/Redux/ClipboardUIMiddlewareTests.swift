@@ -40,5 +40,16 @@ final class ClipboardUIMiddlewareTests: XCTestCase {
         XCTAssertNil(resultAction)
     }
 
+    func test_movePasteboardItemToTop() async {
+        let initialState = ClipboardUIState(pasteboard: mockNSPasteboard)
+
+        let resultAction = await clipboardUIMiddleware(
+                initialState,
+                .movePasteboardItemToTop(.arrange)
+        )
+
+        XCTAssertNil(resultAction)
+    }
+
     // TODO: Mock NSPasteboard for testing
 }
