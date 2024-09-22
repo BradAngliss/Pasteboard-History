@@ -21,6 +21,7 @@ let clipboardUIMiddleware: Middleware<ClipboardUIState, ClipboardUIAction> = { s
             return nil
         }
 
+        // Determine appropriate data type to show
         guard let displayType = state.pasteboard.availableType(from: [.tiff, .png, .string]) else {
             return nil
         }
@@ -32,9 +33,13 @@ let clipboardUIMiddleware: Middleware<ClipboardUIState, ClipboardUIAction> = { s
         }
 
         // Verify item is valid and not currently persisted
-        guard pasteboardItem.pasteboardDataTypes.count > 0,
-              !state.pasteboardItemExists(for: pasteboardItem) else {
+        guard pasteboardItem.pasteboardDataTypes.count > 0 else {
             return nil
+        }
+
+        // Check if pasteboard item already exists
+        guard !state.pasteboardItemExists(for: pasteboardItem) else {
+            return .movePasteboardItemToTop(pasteboardItem)
         }
         
         return .addPasteboardItems(pasteboardItem)
@@ -56,7 +61,8 @@ let clipboardUIMiddleware: Middleware<ClipboardUIState, ClipboardUIAction> = { s
             }
         }
     case .updateChangeCount,
-            .addPasteboardItems:
+            .addPasteboardItems,
+            .movePasteboardItemToTop:
         break
     }
     return nil

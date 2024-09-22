@@ -70,4 +70,22 @@ final class ClipboardUIReducerTests: XCTestCase {
 
         XCTAssertEqual(expectedState, resultState)
     }
+
+    func test_movePasteboardItemToTop() {
+        var initialState = ClipboardUIState(pasteboard: mockNSPasteboard)
+        initialState.items.append(
+            .init(availableType: .string, pasteboardDataTypes: [.string: "other test string".data(using: .utf8)!])
+         )
+        initialState.items.append(.arrange)
+
+        var expectedState = initialState
+        expectedState.items.append(.arrange)
+        expectedState.items.append(
+            .init(availableType: .string, pasteboardDataTypes: [.string: "other test string".data(using: .utf8)!])
+         )
+
+        let resultState = clipboardUIReducer(initialState, .movePasteboardItemToTop(.arrange))
+
+        XCTAssertEqual(expectedState, resultState)
+    }
 }
