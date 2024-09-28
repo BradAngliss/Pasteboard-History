@@ -18,7 +18,7 @@ let package = Package(
     dependencies: [
         .package(name: "PasteboardProvider", path: "../PasteboardProvider"),
         .package(name: "Localizable", path: "../Localizable"),
-        .package(url: "git@github.com:BradAngliss/Swiftux.git", exact: "0.6.0")
+        .package(url: "git@github.com:BradAngliss/Swiftux.git", exact: "0.7.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.

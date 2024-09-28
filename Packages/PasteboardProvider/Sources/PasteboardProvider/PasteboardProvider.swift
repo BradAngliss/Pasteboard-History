@@ -40,7 +40,6 @@ public final class PasteboardProvider: PasteboardProviding {
     public func startTimer() {
         self.closeTimer()
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
-            print("Checking ...")
             self?.checkChangeCount()
         }
     }
