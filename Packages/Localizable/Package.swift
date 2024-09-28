@@ -7,7 +7,7 @@ let package = Package(
     name: "Localizable",
     defaultLocalization: "en",
     platforms: [
-        .macOS(.v11)
+        .macOS(.v14)
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.

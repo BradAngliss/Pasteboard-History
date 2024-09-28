@@ -8,4 +8,4 @@
 import Foundation
 import Swiftux
 
-typealias ClipboardUIStore = Store<ClipboardUIState, ClipboardUIAction>
+typealias ClipboardUIStore = Store<ClipboardUIState, ClipboardUIAction, ClipboardUIEnvironment>

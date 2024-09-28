@@ -9,7 +9,7 @@ import Foundation
 import Swiftux
 import SwiftUI
 
-let clipboardUIMiddleware: Middleware<ClipboardUIState, ClipboardUIAction> = { state, action in
+let clipboardUIMiddleware: Middleware<ClipboardUIState, ClipboardUIAction, ClipboardUIEnvironmentProtocol> = { state, action, _ in
 
     switch action {
     case .refreshPasteboardItems:

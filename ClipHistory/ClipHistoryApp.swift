@@ -9,13 +9,28 @@ import SwiftUI
 import ClipboardUI
 import Localizable
 
-@main
 struct ClipHistoryApp: App {
+    @StateObject private var store: AppStore
+
+    init() {
+        let appEnvironment = AppEnvironment()
+        let store = AppStore(
+            initial: .init(),
+            reducer: appReducer,
+            middleware: appMiddleware,
+            environment: appEnvironment
+        )
+        _store = StateObject(wrappedValue: store)
+    }
+
     var body: some Scene {
         MenuBarExtra(Localizable.stringFor(key: "MenuBarExtra_Title"), systemImage: "clipboard") {
-            ClipboardUIRootView()
-                .frame(width: 300, height: 250)
+            ClipboardUIRootView(
+                pasteboardProvider: store.environment.pasteboardProvider
+            )
+            .frame(width: 300, height: 250)
         }
         .menuBarExtraStyle(.window)
+        .environmentObject(store)
     }
 }
