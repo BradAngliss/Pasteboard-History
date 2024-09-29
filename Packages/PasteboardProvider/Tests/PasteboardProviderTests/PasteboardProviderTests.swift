@@ -1,7 +1,7 @@
 import XCTest
-@testable import PasteboardObserver
+@testable import PasteboardProvider
 
-final class PasteboardObserverTests: XCTestCase {
+final class PasteboardProviderTests: XCTestCase {
     func testExample() throws {
         // XCTest Documentation
         // https://developer.apple.com/documentation/xctest

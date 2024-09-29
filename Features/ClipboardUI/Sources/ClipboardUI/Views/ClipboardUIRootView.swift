@@ -7,18 +7,26 @@
 
 import Foundation
 import SwiftUI
+import PasteboardProvider
 
 public struct ClipboardUIRootView: View {
     
     @StateObject private var store: ClipboardUIStore
     
-    public init() {
-        
+    public init(
+        pasteboardProvider: PasteboardProviding
+    ) {
         let initialState = ClipboardUIState(pasteboard: NSPasteboard.general)
-        
-        let store = ClipboardUIStore(initial: initialState,
-                              reducer: clipboardUIReducer,
-                              middleware: clipboardUIMiddleware)
+        let environment = ClipboardUIEnvironment(
+            pasteboardProvider: pasteboardProvider
+        )
+        let store = ClipboardUIStore(
+            initial: initialState,
+            reducer: clipboardUIReducer,
+            middleware: clipboardUIMiddleware,
+            environment: environment,
+            subscriber: clipboardUISubscriber
+        )
         
         _store = StateObject(wrappedValue: store)
     }
