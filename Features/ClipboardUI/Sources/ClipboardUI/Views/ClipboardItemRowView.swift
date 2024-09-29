@@ -19,11 +19,15 @@ struct ClipboardItemRowView: View {
             itemRow(
                 item: item
             )
-            .frame(maxHeight: 40)
-            .padding(.vertical, 4)
-            .padding(.horizontal, 1)
-            .hoverBackground(isHovering: $isHovering)
+                .padding(.horizontal, 8)
+                .frame(maxHeight: 40)
+                .padding(.vertical, 4)
+                .hoverBackground(
+                    hoverColor: .blue,
+                    isHovering: $isHovering
+                )
             Divider()
+                .padding(.horizontal, 8)
         }
         .padding(.vertical, 2)
     }

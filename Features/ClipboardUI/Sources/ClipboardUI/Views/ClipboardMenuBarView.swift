@@ -36,7 +36,6 @@ struct ClipboardMenuBarView: View {
                             }
                     }
                 }
-                .padding(.horizontal, 8)
             }
             Spacer()
             Divider()
