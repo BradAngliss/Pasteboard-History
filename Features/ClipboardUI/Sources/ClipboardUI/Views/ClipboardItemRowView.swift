@@ -8,8 +8,10 @@
 import Foundation
 import SwiftUI
 import Localizable
+import Common
 
 struct ClipboardItemRowView: View {
+    @State private var isHovering: Bool = false
     let item: PasteboardItem
 
     var body: some View {
@@ -17,6 +19,10 @@ struct ClipboardItemRowView: View {
             itemRow(
                 item: item
             )
+            .frame(maxHeight: 40)
+            .padding(.vertical, 4)
+            .padding(.horizontal, 1)
+            .hoverBackground(isHovering: $isHovering)
             Divider()
         }
         .padding(.vertical, 2)
@@ -36,7 +42,7 @@ struct ClipboardItemRowView: View {
             HStack {
                 Image(nsImage: NSImage(data: item.displayData)!)
                     .resizable()
-                    .frame(width: 100, height: 100)
+                    .aspectRatio(contentMode: .fit)
                 Spacer()
                 Text(item.availableType.rawValue)
             }

@@ -9,7 +9,7 @@ import SwiftUI
 
 public extension View {
     func hoverBackground(
-        isHovering: Binding<Bool>
+        isHovering: Binding<Bool> = .constant(false)
     ) -> some View {
         self.modifier(HoverBackgroundViewModifier(isHovering: isHovering.wrappedValue))
     }
