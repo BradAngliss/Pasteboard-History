@@ -54,25 +54,25 @@ struct ClipboardMenuBarView: View {
         VStack(spacing: 4) {
             HStack {
                 Text(Localizable.stringFor(key: "MenuBarExtra_Refresh_Title"))
-                    .onTapGesture {
-                        store.dispatch(.refreshPasteboardItems)
-                    }
                 Spacer()
             }
             .frame(maxWidth: .infinity)
             .hoverBackground()
+            .onTapGesture {
+                store.dispatch(.refreshPasteboardItems)
+            }
             
             HStack {
                 Text(Localizable.stringFor(key: "MenuBarExtra_Quit_Title"))
-                    .onTapGesture {
-                        NSApplication.shared.terminate(nil)
-                }
                 .keyboardShortcut("q")
                 Spacer()
             }
             .frame(maxWidth: .infinity)
             .hoverBackground()
             .padding(.bottom, 8)
+            .onTapGesture {
+                NSApplication.shared.terminate(nil)
+            }
         }
     }
 }
