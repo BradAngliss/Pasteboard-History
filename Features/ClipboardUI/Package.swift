@@ -16,6 +16,7 @@ let package = Package(
             targets: ["ClipboardUI"]),
     ],
     dependencies: [
+        .package(name: "Common", path: "../Common"),
         .package(name: "PasteboardProvider", path: "../PasteboardProvider"),
         .package(name: "Localizable", path: "../Localizable"),
         .package(url: "git@github.com:BradAngliss/Swiftux.git", exact: "0.7.0")
@@ -28,7 +29,8 @@ let package = Package(
             dependencies: [
                 "Swiftux",
                 "Localizable",
-                "PasteboardProvider"
+                "PasteboardProvider",
+                "Common"
             ]
         ),
         .testTarget(

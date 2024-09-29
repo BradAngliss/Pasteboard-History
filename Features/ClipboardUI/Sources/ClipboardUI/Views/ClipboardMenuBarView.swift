@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Localizable
+import Common
 
 struct ClipboardMenuBarView: View {
     @EnvironmentObject private var store: ClipboardUIStore
@@ -35,7 +36,6 @@ struct ClipboardMenuBarView: View {
                             }
                     }
                 }
-                .padding(.horizontal, 8)
             }
             Spacer()
             Divider()
@@ -50,18 +50,28 @@ struct ClipboardMenuBarView: View {
     }
 
     private func footer() -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(Localizable.stringFor(key: "MenuBarExtra_Refresh_Title"))
-                .onTapGesture {
-                    store.dispatch(.refreshPasteboardItems)
-                }
-            
-            Text(Localizable.stringFor(key: "MenuBarExtra_Quit_Title"))
-                .onTapGesture {
-                    NSApplication.shared.terminate(nil)
+        VStack(spacing: 4) {
+            HStack {
+                Text(Localizable.stringFor(key: "MenuBarExtra_Refresh_Title"))
+                Spacer()
             }
-            .keyboardShortcut("q")
+            .frame(maxWidth: .infinity)
+            .hoverBackground()
+            .onTapGesture {
+                store.dispatch(.refreshPasteboardItems)
+            }
+            
+            HStack {
+                Text(Localizable.stringFor(key: "MenuBarExtra_Quit_Title"))
+                .keyboardShortcut("q")
+                Spacer()
+            }
+            .frame(maxWidth: .infinity)
+            .hoverBackground()
             .padding(.bottom, 8)
+            .onTapGesture {
+                NSApplication.shared.terminate(nil)
+            }
         }
     }
 }
