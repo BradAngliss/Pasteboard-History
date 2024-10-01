@@ -13,13 +13,13 @@ import Common
 struct MenuBarView: View {
     @EnvironmentObject private var store: MenuBarStore
 
-    private var clipboardUIState: MenuBarState {
+    private var menuBarState: MenuBarState {
         store.state
     }
 
     var body: some View {
         let pasteboardItems: Binding<[PasteboardItem]> = .init(
-            get: { clipboardUIState.items.reversed() },
+            get: { menuBarState.items.reversed() },
             set: { _ in /* not required*/ }
         )
 
