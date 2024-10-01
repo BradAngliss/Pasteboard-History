@@ -23,6 +23,17 @@
         }
       }
     },
+    "MenuBarExtra_Settings_Title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
+    },
     "MenuBarExtra_Title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -33,6 +44,9 @@
           }
         }
       }
+    },
+    "Test window group" : {
+
     }
   },
   "version" : "1.0"

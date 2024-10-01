@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-import ClipboardUI
+import MenuBar
+import PasteboardUI
 import Localizable
 
 struct ClipHistoryApp: App {
@@ -24,8 +25,21 @@ struct ClipHistoryApp: App {
     }
 
     var body: some Scene {
+        WindowGroup {
+            Text("Test window group")
+                .navigationTitle(Localizable.stringFor(key: "MenuBarExtra_Title"))
+        }
+        .commands {
+            ClipHistoryCommands()
+        }
+
+        Settings {
+            PasteboardUIRootView()
+                .environmentObject(store)
+        }
+
         MenuBarExtra(Localizable.stringFor(key: "MenuBarExtra_Title"), systemImage: "clipboard") {
-            ClipboardUIRootView(
+            MenuBarRootView(
                 pasteboardProvider: store.environment.pasteboardProvider
             )
             .frame(width: 300, height: 250)
