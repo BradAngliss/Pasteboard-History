@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "ClipboardUI",
+    name: "MenuBar`",
     defaultLocalization: "en",
     platforms: [
         .macOS(.v14)
@@ -12,8 +12,8 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "ClipboardUI",
-            targets: ["ClipboardUI"]),
+            name: "MenuBar",
+            targets: ["MenuBar"]),
     ],
     dependencies: [
         .package(name: "Common", path: "../Common"),
@@ -25,7 +25,7 @@ let package = Package(
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "ClipboardUI",
+            name: "MenuBar",
             dependencies: [
                 "Swiftux",
                 "Localizable",
@@ -34,7 +34,7 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "ClipboardUITests",
-            dependencies: ["ClipboardUI"]),
+            name: "MenuBarTests",
+            dependencies: ["MenuBar"]),
     ]
 )

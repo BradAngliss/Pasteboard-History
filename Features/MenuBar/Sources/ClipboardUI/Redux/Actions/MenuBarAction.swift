@@ -1,6 +1,6 @@
 ///
-//  ClipboardUIAction.swift
-//  ClipboardUI
+//  MenuBarAction.swift
+//  MenuBar
 //
 //  Created by Brad Angliss on 18/06/2024.
 //
@@ -8,14 +8,14 @@
 import Foundation
 import SwiftUI
 
-enum ClipboardUIAction: Equatable {
+enum MenuBarAction: Equatable {
     case updateChangeCount(changeCount: Int)
     case refreshPasteboardItems
     case copyToPasteboard(PasteboardItem)
     case addPasteboardItems(PasteboardItem)
     case movePasteboardItemToTop(PasteboardItem)
 
-    static func == (lhs: ClipboardUIAction, rhs: ClipboardUIAction) -> Bool {
+    static func == (lhs: MenuBarAction, rhs: MenuBarAction) -> Bool {
         switch (lhs, rhs) {
         case (.refreshPasteboardItems, .refreshPasteboardItems):
             return true

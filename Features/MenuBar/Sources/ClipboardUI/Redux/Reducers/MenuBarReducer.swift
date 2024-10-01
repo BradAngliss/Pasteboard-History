@@ -1,6 +1,6 @@
 //
-//  ClipboardUIReducer.swift
-//  ClipboardUI
+//  MenuBarReducer.swift
+//  MenuBar
 //
 //  Created by Brad Angliss on 18/06/2024.
 //
@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import Swiftux
 
-let clipboardUIReducer: Reducer<ClipboardUIState, ClipboardUIAction> = { state, action in
+let menuBarReducer: Reducer<MenuBarState, MenuBarAction> = { state, action in
     var newState = state
     switch action {
 

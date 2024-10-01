@@ -1,6 +1,6 @@
 //
-//  ClipboardItemRowView.swift
-//  ClipboardUI
+//  MenuBarItemRowView.swift
+//  MenuBar
 //
 //  Created by Brad Angliss on 21/06/2024.
 //
@@ -10,7 +10,7 @@ import SwiftUI
 import Localizable
 import Common
 
-struct ClipboardItemRowView: View {
+struct MenuBarItemRowView: View {
     @State private var isHovering: Bool = false
     let item: PasteboardItem
 

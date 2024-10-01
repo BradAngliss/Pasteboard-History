@@ -1,6 +1,6 @@
 //
-//  ClipboardUI.swift
-//  ClipboardUI
+//  MenuBarRootView.swift
+//  MenuBar
 //
 //  Created by Brad Angliss on 18/06/2024.
 //
@@ -9,30 +9,30 @@ import Foundation
 import SwiftUI
 import PasteboardProvider
 
-public struct ClipboardUIRootView: View {
+public struct MenuBarRootView: View {
     
-    @StateObject private var store: ClipboardUIStore
+    @StateObject private var store: MenuBarStore
     
     public init(
         pasteboardProvider: PasteboardProviding
     ) {
-        let initialState = ClipboardUIState(pasteboard: NSPasteboard.general)
-        let environment = ClipboardUIEnvironment(
+        let initialState = MenuBarState(pasteboard: NSPasteboard.general)
+        let environment = MenuBarEnvironment(
             pasteboardProvider: pasteboardProvider
         )
-        let store = ClipboardUIStore(
+        let store = MenuBarStore(
             initial: initialState,
-            reducer: clipboardUIReducer,
-            middleware: clipboardUIMiddleware,
+            reducer: menuBarReducer,
+            middleware: menuBarMiddleware,
             environment: environment,
-            subscriber: clipboardUISubscriber
+            subscriber: menuBarSubscriber
         )
         
         _store = StateObject(wrappedValue: store)
     }
     
     public var body: some View {
-        ClipboardMenuBarView()
+        MenuBarView()
             .environmentObject(store)
     }
     

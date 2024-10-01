@@ -1,6 +1,6 @@
 //
-//  ClipboardMenuBarView.swift
-//  ClipHistory
+//  MenuBarView.swift
+//  MenuBar
 //
 //  Created by Brad Angliss on 17/06/2024.
 //
@@ -10,10 +10,10 @@ import SwiftUI
 import Localizable
 import Common
 
-struct ClipboardMenuBarView: View {
-    @EnvironmentObject private var store: ClipboardUIStore
+struct MenuBarView: View {
+    @EnvironmentObject private var store: MenuBarStore
 
-    private var clipboardUIState: ClipboardUIState {
+    private var clipboardUIState: MenuBarState {
         store.state
     }
 
@@ -30,7 +30,7 @@ struct ClipboardMenuBarView: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     ForEach(pasteboardItems, id: \.self) { item in
-                        ClipboardItemRowView(item: item.wrappedValue)
+                        MenuBarItemRowView(item: item.wrappedValue)
                             .onTapGesture {
                                 store.dispatch(.copyToPasteboard(item.wrappedValue))
                             }
@@ -77,5 +77,5 @@ struct ClipboardMenuBarView: View {
 }
 
 #Preview {
-    ClipboardMenuBarView()
+    MenuBarView()
 }

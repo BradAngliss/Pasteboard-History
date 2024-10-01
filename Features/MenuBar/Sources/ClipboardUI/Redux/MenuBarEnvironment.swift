@@ -1,6 +1,6 @@
 //
-//  ClipboardUIEnvironment.swift
-//  
+//  MenuBarEnvironment.swift
+//  MenuBar
 //
 //  Created by Brad Angliss on 23/09/2024.
 //
@@ -8,11 +8,11 @@
 import Foundation
 import PasteboardProvider
 
-protocol ClipboardUIEnvironmentProtocol {
+protocol MenuBarEnvironmentProtocol {
     var pasteboardProvider: PasteboardProviding { get }
 }
 
-class ClipboardUIEnvironment: ClipboardUIEnvironmentProtocol {
+class MenuBarEnvironment: MenuBarEnvironmentProtocol {
     let pasteboardProvider: PasteboardProviding
 
     init(

@@ -1,6 +1,6 @@
 //
-//  ClipboardUIState.swift
-//  ClipboardUI
+//  MenuBarState.swift
+//  MenuBar
 //
 //  Created by Brad Angliss on 18/06/2024.
 //
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct ClipboardUIState: Equatable {
+struct MenuBarState: Equatable {
     var items = [PasteboardItem]()
     let pasteboard: NSPasteboard
     
