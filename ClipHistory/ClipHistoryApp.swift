@@ -25,6 +25,14 @@ struct ClipHistoryApp: App {
     }
 
     var body: some Scene {
+        WindowGroup {
+            Text("Test window group")
+                .navigationTitle(Localizable.stringFor(key: "MenuBarExtra_Title"))
+        }
+        .commands {
+            ClipHistoryCommands()
+        }
+
         Settings {
             PasteboardUIRootView()
                 .environmentObject(store)

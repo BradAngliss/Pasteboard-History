@@ -60,6 +60,17 @@ struct MenuBarView: View {
             .onTapGesture {
                 store.dispatch(.refreshPasteboardItems)
             }
+
+            SettingsLink {
+                HStack {
+                    Text(Localizable.stringFor(key: "MenuBarExtra_Settings_Title"))
+                    Spacer()
+                }
+            }
+            .hoverBackground()
+            
+            .buttonStyle(PlainButtonStyle())
+            .frame(maxWidth: .infinity)
             
             HStack {
                 Text(Localizable.stringFor(key: "MenuBarExtra_Quit_Title"))

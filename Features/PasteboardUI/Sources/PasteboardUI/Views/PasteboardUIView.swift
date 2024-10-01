@@ -20,7 +20,7 @@ struct PasteboardUIView: View {
         TabView {
             PasteboardUIGeneralSettingsView()
                 .tabItem {
-                    Label("General", systemImage: "person.crop.circle")
+                    Label("General", systemImage: "gearshape")
                 }
         }
         .scenePadding()

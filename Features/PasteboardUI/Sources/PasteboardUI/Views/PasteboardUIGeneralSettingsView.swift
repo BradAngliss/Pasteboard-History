@@ -27,7 +27,6 @@ struct PasteboardUIGeneralSettingsView: View {
                 }
                 .toggleStyle(.switch)
                 
-
                 LabeledContent {
                     Stepper(value: $stepperValue, in: 1...10) {
                         Text("\(stepperValue)")
