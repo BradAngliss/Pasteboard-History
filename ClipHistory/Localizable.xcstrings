@@ -33,9 +33,6 @@
           }
         }
       }
-    },
-    "This is some test text" : {
-
     }
   },
   "version" : "1.0"

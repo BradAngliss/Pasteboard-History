@@ -18,8 +18,12 @@ struct PasteboardUIView: View {
 
     var body: some View {
         TabView {
-            
+            PasteboardUIGeneralSettingsView()
+                .tabItem {
+                    Label("General", systemImage: "person.crop.circle")
+                }
         }
+        .scenePadding()
         .frame(width: 450, height: 450)
     }
 }

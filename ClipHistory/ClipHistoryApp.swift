@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MenuBar
+import PasteboardUI
 import Localizable
 
 struct ClipHistoryApp: App {
@@ -24,10 +25,9 @@ struct ClipHistoryApp: App {
     }
 
     var body: some Scene {
-        WindowGroup {
-            VStack {
-                Text("This is some test text")
-            }
+        Settings {
+            PasteboardUIRootView()
+                .environmentObject(store)
         }
 
         MenuBarExtra(Localizable.stringFor(key: "MenuBarExtra_Title"), systemImage: "clipboard") {

@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import PasteboardProvider
 
-public struct MenuBarRootView: View {
+public struct PasteboardUIRootView: View {
     
     @StateObject private var store: PasteboardUIStore
     
