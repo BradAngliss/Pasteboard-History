@@ -24,6 +24,12 @@ struct ClipHistoryApp: App {
     }
 
     var body: some Scene {
+        WindowGroup {
+            VStack {
+                Text("This is some test text")
+            }
+        }
+
         MenuBarExtra(Localizable.stringFor(key: "MenuBarExtra_Title"), systemImage: "clipboard") {
             MenuBarRootView(
                 pasteboardProvider: store.environment.pasteboardProvider
@@ -32,11 +38,5 @@ struct ClipHistoryApp: App {
         }
         .menuBarExtraStyle(.window)
         .environmentObject(store)
-        
-        WindowGroup {
-            VStack {
-                Text("This is some test text")
-            }
-        }
     }
 }
