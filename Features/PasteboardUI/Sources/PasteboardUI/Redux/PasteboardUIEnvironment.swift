@@ -6,11 +6,16 @@
 //
 
 import Foundation
-import PasteboardProvider
+import PasteboardAppStorage
 
-protocol PasteboardUIEnvironmentProtocol {}
+protocol PasteboardUIEnvironmentProtocol {
+    var appStorage: PasteboardAppStorageProtocol { get }
+}
 
 class PasteboardUIEnvironment: PasteboardUIEnvironmentProtocol {
-    init() {
+    let appStorage: PasteboardAppStorageProtocol
+
+    init(appStorage: PasteboardAppStorageProtocol) {
+        self.appStorage = appStorage
     }
 }

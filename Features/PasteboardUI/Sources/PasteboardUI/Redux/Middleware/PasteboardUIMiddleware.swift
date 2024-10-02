@@ -8,6 +8,10 @@
 import Foundation
 import Swiftux
 
-let pasteboardUIMiddleware: Middleware<PasteboardUIState, PasteboardUIAction, PasteboardUIEnvironmentProtocol> = { state, action, _ in
-        return nil
+let pasteboardUIMiddleware: Middleware<PasteboardUIState, PasteboardUIAction, PasteboardUIEnvironmentProtocol> = { state, action, environment in
+    switch action {
+    case let .setIsMenuBarActive(isActive):
+        environment.appStorage.setValue(forKey: .isMenuBarEnabled, value: isActive)
+    }
+    return nil
 }

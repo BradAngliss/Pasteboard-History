@@ -1,5 +1,5 @@
 import XCTest
-@testable import AppStorage
+@testable import PasteboardAppStorage
 
 final class AppStorageTests: XCTestCase {
     func testExample() throws {

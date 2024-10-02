@@ -9,5 +9,5 @@ import Foundation
 import SwiftUI
 
 enum PasteboardUIAction: Equatable {
-
+    case setIsMenuBarActive(Bool)
 }

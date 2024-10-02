@@ -8,14 +8,23 @@
 import Foundation
 import SwiftUI
 import PasteboardProvider
+import PasteboardAppStorage
 
 public struct PasteboardUIRootView: View {
     
     @StateObject private var store: PasteboardUIStore
     
-    public init() {
-        let initialState = PasteboardUIState()
-        let environment = PasteboardUIEnvironment()
+    public init(
+        appStorage: PasteboardAppStorageProtocol
+    ) {
+        let environment = PasteboardUIEnvironment(
+            appStorage: appStorage
+        )
+
+        let initialState = PasteboardUIState(
+            isMenuBarActive: appStorage.getBool(forKey: .isMenuBarEnabled)
+        )
+
         let store = PasteboardUIStore(
             initial: initialState,
             reducer: pasteboardUIReducer,

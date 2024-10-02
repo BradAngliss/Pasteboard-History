@@ -9,6 +9,9 @@ import Foundation
 import SwiftUI
 
 struct PasteboardUIState: Equatable {
-    init() {
+    var isMenuBarActive: Bool
+    
+    init(isMenuBarActive: Bool) {
+        self.isMenuBarActive = isMenuBarActive
     }
 }

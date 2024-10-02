@@ -10,5 +10,10 @@ import SwiftUI
 import Swiftux
 
 let pasteboardUIReducer: Reducer<PasteboardUIState, PasteboardUIAction> = { state, action in
-    return state
+    var newState = state
+    switch action {
+    case let .setIsMenuBarActive(isActive):
+        newState.isMenuBarActive = isActive
+    }
+    return newState
 }

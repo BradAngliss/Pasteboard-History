@@ -16,7 +16,9 @@ let package = Package(
             targets: ["PasteboardUI"]),
     ],
     dependencies: [
+        .package(name: "PasteboardAppStorage", path: "../PasteboardAppStorage"),
         .package(name: "PasteboardProvider", path: "../PasteboardProvider"),
+        .package(name: "Localizable", path: "../Localizable"),
         .package(url: "git@github.com:BradAngliss/Swiftux.git", exact: "0.7.0")
     ],
     targets: [
@@ -25,8 +27,10 @@ let package = Package(
         .target(
             name: "PasteboardUI",
             dependencies: [
+                "Localizable",
                 "Swiftux",
-                "PasteboardProvider"
+                "PasteboardProvider",
+                "PasteboardAppStorage"
             ]
         ),
         .testTarget(

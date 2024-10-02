@@ -13,8 +13,10 @@ import Localizable
 struct ClipHistoryApp: App {
     @StateObject private var store: AppStore
 
+    var appEnvironment: AppEnvironmentProtocol
+
     init() {
-        let appEnvironment = AppEnvironment()
+        appEnvironment = AppEnvironment()
         let store = AppStore(
             initial: .init(),
             reducer: appReducer,
@@ -34,8 +36,10 @@ struct ClipHistoryApp: App {
         }
 
         Settings {
-            PasteboardUIRootView()
-                .environmentObject(store)
+            PasteboardUIRootView(
+                appStorage: appEnvironment.appStorage
+            )
+            .environmentObject(store)
         }
 
         MenuBarExtra(Localizable.stringFor(key: "MenuBarExtra_Title"), systemImage: "clipboard") {
