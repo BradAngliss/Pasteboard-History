@@ -10,4 +10,5 @@ import SwiftUI
 
 enum PasteboardUIAction: Equatable {
     case setIsMenuBarActive(Bool)
+    case setPasteboardHistory(Int)
 }

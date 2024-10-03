@@ -62,7 +62,8 @@ let menuBarMiddleware: Middleware<MenuBarState, MenuBarAction, MenuBarEnvironmen
         }
     case .updateChangeCount,
             .addPasteboardItems,
-            .movePasteboardItemToTop:
+            .movePasteboardItemToTop,
+            .updatePasteboardHistoryLimit:
         break
     }
     return nil

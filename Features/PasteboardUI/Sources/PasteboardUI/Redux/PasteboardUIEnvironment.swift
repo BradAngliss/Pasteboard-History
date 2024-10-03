@@ -7,6 +7,7 @@
 
 import Foundation
 import PasteboardAppStorage
+import Combine
 
 protocol PasteboardUIEnvironmentProtocol {
     var appStorage: PasteboardAppStorageProtocol { get }
@@ -15,7 +16,9 @@ protocol PasteboardUIEnvironmentProtocol {
 class PasteboardUIEnvironment: PasteboardUIEnvironmentProtocol {
     let appStorage: PasteboardAppStorageProtocol
 
-    init(appStorage: PasteboardAppStorageProtocol) {
+    init(
+        appStorage: PasteboardAppStorageProtocol
+    ) {
         self.appStorage = appStorage
     }
 }

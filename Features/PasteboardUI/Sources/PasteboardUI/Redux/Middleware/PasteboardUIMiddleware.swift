@@ -12,6 +12,10 @@ let pasteboardUIMiddleware: Middleware<PasteboardUIState, PasteboardUIAction, Pa
     switch action {
     case let .setIsMenuBarActive(isActive):
         environment.appStorage.setValue(forKey: .isMenuBarEnabled, value: isActive)
+        environment.appStorage.isMenuBarActive.send(isActive)
+    case let .setPasteboardHistory(historyLimit):
+        environment.appStorage.pasteboardHistoryLimit.send(historyLimit)
+        environment.appStorage.setValue(forKey: .historyLimit, value: historyLimit)
     }
     return nil
 }

@@ -27,6 +27,7 @@ struct ClipHistoryApp: App {
     }
 
     var body: some Scene {
+        // MARK: Main Window
         WindowGroup {
             Text("Test window group")
                 .navigationTitle(Localizable.stringFor(key: "MenuBarExtra_Title"))
@@ -35,6 +36,7 @@ struct ClipHistoryApp: App {
             ClipHistoryCommands()
         }
 
+        // MARK: Settings
         Settings {
             PasteboardUIRootView(
                 appStorage: appEnvironment.appStorage
@@ -42,13 +44,16 @@ struct ClipHistoryApp: App {
             .environmentObject(store)
         }
 
+        // MARK: MenuBarExtra
         MenuBarExtra(Localizable.stringFor(key: "MenuBarExtra_Title"), systemImage: "clipboard") {
             MenuBarRootView(
+                appStorage: appEnvironment.appStorage,
                 pasteboardProvider: store.environment.pasteboardProvider
             )
             .frame(width: 300, height: 250)
         }
         .menuBarExtraStyle(.window)
         .environmentObject(store)
+        
     }
 }

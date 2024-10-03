@@ -14,6 +14,8 @@ let pasteboardUIReducer: Reducer<PasteboardUIState, PasteboardUIAction> = { stat
     switch action {
     case let .setIsMenuBarActive(isActive):
         newState.isMenuBarActive = isActive
+    case let .setPasteboardHistory(pasteboardHistory):
+        newState.pasteboardHistory = pasteboardHistory
     }
     return newState
 }

@@ -10,8 +10,13 @@ import SwiftUI
 
 struct PasteboardUIState: Equatable {
     var isMenuBarActive: Bool
+    var pasteboardHistory: Int
     
-    init(isMenuBarActive: Bool) {
+    init(
+        isMenuBarActive: Bool,
+        pasteboardHistory: Int
+    ) {
         self.isMenuBarActive = isMenuBarActive
+        self.pasteboardHistory = pasteboardHistory
     }
 }

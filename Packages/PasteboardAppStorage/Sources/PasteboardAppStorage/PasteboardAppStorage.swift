@@ -6,13 +6,17 @@
 //
 
 import SwiftUI
+import Combine
 
 enum PasteboardAppStorageErrors: Error {
     case GetKeyError
 }
 
 public protocol PasteboardAppStorageProtocol {
-    func getInt(forKey key: StorageKeys) throws -> Int
+    var pasteboardHistoryLimit: CurrentValueSubject<Int?, Never> { get }
+    var isMenuBarActive: CurrentValueSubject<Bool?, Never> { get }
+
+    func getInt(forKey key: StorageKeys) -> Int
     func getString(forKey key: StorageKeys) throws -> String
     func getBool(forKey key: StorageKeys) -> Bool
 
@@ -26,7 +30,12 @@ public class PasteboardAppStorageGroup: PasteboardAppStorageProtocol {
 
     public init() { /* no implementation required */ }
 
-    public func getInt(forKey key: StorageKeys) throws -> Int {
+    // TODO: Refactor to not be optional and use value from UserDefaults
+    public var pasteboardHistoryLimit: CurrentValueSubject<Int?, Never> = .init(0)
+
+    public var isMenuBarActive: CurrentValueSubject<Bool?, Never> = .init(true)
+
+    public func getInt(forKey key: StorageKeys) -> Int {
         return userDefaults.integer(forKey: key.rawValue)
     }
 

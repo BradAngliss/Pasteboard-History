@@ -8,17 +8,24 @@
 import Foundation
 import SwiftUI
 import PasteboardProvider
+import PasteboardAppStorage
 
 public struct MenuBarRootView: View {
     
     @StateObject private var store: MenuBarStore
     
     public init(
+        appStorage: PasteboardAppStorageProtocol,
         pasteboardProvider: PasteboardProviding
     ) {
-        let initialState = MenuBarState(pasteboard: NSPasteboard.general)
+        let pasteboardLimit = appStorage.getInt(forKey: .historyLimit)
+        let initialState = MenuBarState(
+            pasteboard: NSPasteboard.general,
+            pasteboardLimit: pasteboardLimit
+        )
         let environment = MenuBarEnvironment(
-            pasteboardProvider: pasteboardProvider
+            pasteboardProvider: pasteboardProvider,
+            appStorage: appStorage
         )
         let store = MenuBarStore(
             initial: initialState,

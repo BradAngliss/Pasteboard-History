@@ -9,14 +9,20 @@ import Foundation
 import SwiftUI
 
 struct MenuBarState: Equatable {
-    var items = [PasteboardItem]()
     let pasteboard: NSPasteboard
-    
+
+    var items = [PasteboardItem]()
     var lastChangeCount: Int
-    
-    init(lastChangeCount: Int = 0, pasteboard: NSPasteboard) {
+    var pasteboardLimit: Int
+
+    init(
+        lastChangeCount: Int = 0,
+        pasteboard: NSPasteboard,
+        pasteboardLimit: Int
+    ) {
         self.lastChangeCount = lastChangeCount
         self.pasteboard = pasteboard
+        self.pasteboardLimit = pasteboardLimit
     }
 
     func pasteboardItemExists(for pasteboardItem: PasteboardItem) -> Bool {

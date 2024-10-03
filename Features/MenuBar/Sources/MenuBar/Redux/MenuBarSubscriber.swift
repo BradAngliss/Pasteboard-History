@@ -15,4 +15,15 @@ let menuBarSubscriber: Subscribe<MenuBarStore, MenuBarEnvironment> = { store, en
             store.dispatch(.refreshPasteboardItems)
         }
         .store(in: &store.cancellables)
+
+    environment.appStorage.pasteboardHistoryLimit
+        .receive(on: DispatchQueue.main)
+        .sink { newHistoryLimit in
+            guard let newLimit = newHistoryLimit else {
+                print("Error with subscriber: pasteboardHistoryLimit in MenuBarSubscriber")
+                return
+            }
+            store.dispatch(.updatePasteboardHistoryLimit(newLimit))
+        }
+        .store(in: &store.cancellables)
 }

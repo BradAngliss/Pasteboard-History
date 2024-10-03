@@ -6,9 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 struct AppState: Equatable {
-    init() {
-        
-    }
 }

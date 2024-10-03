@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import PasteboardProvider
 import PasteboardAppStorage
+import Combine
 
 public struct PasteboardUIRootView: View {
     
@@ -21,8 +22,10 @@ public struct PasteboardUIRootView: View {
             appStorage: appStorage
         )
 
+        let pasteboardHistory = appStorage.getInt(forKey: .historyLimit)
         let initialState = PasteboardUIState(
-            isMenuBarActive: appStorage.getBool(forKey: .isMenuBarEnabled)
+            isMenuBarActive: appStorage.getBool(forKey: .isMenuBarEnabled),
+            pasteboardHistory: pasteboardHistory
         )
 
         let store = PasteboardUIStore(

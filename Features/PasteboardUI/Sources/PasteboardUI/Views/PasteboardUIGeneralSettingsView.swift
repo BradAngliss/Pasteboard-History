@@ -16,13 +16,15 @@ struct PasteboardUIGeneralSettingsView: View {
         store.state
     }
 
-    @State private var stepperValue: Int = 5
-    @State private var isToggleOn: Bool = false
-
     var body: some View {
         let isMenuBarActive: Binding<Bool> = .init(
             get: { pasteboardUISettingsState.isMenuBarActive },
             set: { store.dispatch(.setIsMenuBarActive($0)) }
+        )
+
+        let pasteboardHistory: Binding<Int> = .init(
+            get: { pasteboardUISettingsState.pasteboardHistory },
+            set: { store.dispatch(.setPasteboardHistory($0)) }
         )
 
         VStack {
@@ -34,8 +36,8 @@ struct PasteboardUIGeneralSettingsView: View {
                 .toggleStyle(.switch)
                 
                 LabeledContent {
-                    Stepper(value: $stepperValue, in: 1...10) {
-                        Text("\(stepperValue)")
+                    Stepper(value: pasteboardHistory, in: 1...10) {
+                        Text("\(pasteboardHistory.wrappedValue)")
                     }
                 } label: {
                     Text("History Limit:")

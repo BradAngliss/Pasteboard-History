@@ -14,6 +14,7 @@ enum MenuBarAction: Equatable {
     case copyToPasteboard(PasteboardItem)
     case addPasteboardItems(PasteboardItem)
     case movePasteboardItemToTop(PasteboardItem)
+    case updatePasteboardHistoryLimit(Int)
 
     static func == (lhs: MenuBarAction, rhs: MenuBarAction) -> Bool {
         switch (lhs, rhs) {
@@ -25,7 +26,10 @@ enum MenuBarAction: Equatable {
             return lhsItem == rhsItem
         case let (.addPasteboardItems(lhsItem), .addPasteboardItems(rhsItem)):
             return lhsItem == rhsItem
-            
+        case let (.movePasteboardItemToTop(lhsItem), .movePasteboardItemToTop(rhsItem)):
+            return lhsItem == rhsItem
+        case let (.updatePasteboardHistoryLimit(lhsLimit), .updatePasteboardHistoryLimit(rhsLimit)):
+            return lhsLimit == rhsLimit
         default:
             return false
         }
