@@ -8,5 +8,5 @@
 import Foundation
 
 enum AppAction: Equatable {
-
+    case setIsShowingMenuBar(Bool)
 }

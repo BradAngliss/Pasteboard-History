@@ -9,4 +9,5 @@ import Foundation
 import Combine
 
 struct AppState: Equatable {
+    var isShowingMenuBar: Bool
 }

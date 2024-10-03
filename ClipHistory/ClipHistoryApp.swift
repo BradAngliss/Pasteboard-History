@@ -17,16 +17,21 @@ struct ClipHistoryApp: App {
 
     init() {
         appEnvironment = AppEnvironment()
+        let isShowingMenuBar = appEnvironment.appStorage.getBool(forKey: .isMenuBarEnabled)
+
+        let initialState = AppState(isShowingMenuBar: isShowingMenuBar)
         let store = AppStore(
-            initial: .init(),
+            initial: initialState,
             reducer: appReducer,
             middleware: appMiddleware,
-            environment: appEnvironment
+            environment: appEnvironment,
+            subscriber: appSubscriber
         )
         _store = StateObject(wrappedValue: store)
     }
 
     var body: some Scene {
+
         // MARK: Main Window
         WindowGroup {
             Text("Test window group")
@@ -44,16 +49,6 @@ struct ClipHistoryApp: App {
             .environmentObject(store)
         }
 
-        // MARK: MenuBarExtra
-        MenuBarExtra(Localizable.stringFor(key: "MenuBarExtra_Title"), systemImage: "clipboard") {
-            MenuBarRootView(
-                appStorage: appEnvironment.appStorage,
-                pasteboardProvider: store.environment.pasteboardProvider
-            )
-            .frame(width: 300, height: 250)
-        }
-        .menuBarExtraStyle(.window)
-        .environmentObject(store)
-        
+        MenuBarExtraScene(store: store)
     }
 }

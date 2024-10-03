@@ -8,6 +8,12 @@
 import Foundation
 import Swiftux
 
-let appMiddleware: Middleware<AppState, AppAction, AppEnvironmentProtocol> = { state, action, _ in
+let appMiddleware: Middleware<AppState, AppAction, AppEnvironmentProtocol> = { state, action, environment in
+    switch action {
+        
+    case .setIsShowingMenuBar:
+        break
+    }
+
     return nil
 }

@@ -9,6 +9,12 @@ import Foundation
 import Swiftux
 
 let appReducer: Reducer<AppState, AppAction> = { state, action in
-    let newState = state
+    var newState = state
+
+    switch action {
+    case let .setIsShowingMenuBar(isShowing):
+        newState.isShowingMenuBar = isShowing
+    }
+
     return newState
 }
